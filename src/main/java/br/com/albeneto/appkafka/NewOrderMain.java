@@ -10,10 +10,16 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 public class NewOrderMain {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-		KafkaProducer kafkaProducer = new KafkaProducer<String, String>(getProperties());
-		String value = "id_order_123,id_usu_aneto,900";
+		/*
+		 * Este código consiste em produzir uma mensagem no tópico: ECOMMERCE_NEW_ORDER
+		 * Como estamos testando no wsl devemos obter o ip do wsl com o comando: wsl hostname -I
+		 * É necessário configurar onde o kafka esta rodando bem como as classes de serialização e deserialização da mensagem
+		 */
+		KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(getProperties());
+		String value = "id_order_999,id_usu_aneto,235";
 		ProducerRecord<String, String> producerRecord = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
 		kafkaProducer.send(producerRecord, (data, ex) -> {
 	        if (ex != null) {
@@ -26,7 +32,7 @@ public class NewOrderMain {
 
 	private static Properties getProperties() {
 		Properties properties = new Properties();
-		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.18.58.163:9092");
+		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.21.36.210:9092");
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		return properties;

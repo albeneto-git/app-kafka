@@ -39,7 +39,7 @@ public class FraudDetectorService {
 
 	private static Properties getProperties() {
 		Properties properties = new Properties();
-		properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.18.58.163:9092");
+		properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.21.36.210:9092");
 		properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 		properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, FraudDetectorService.class.getSimpleName());
